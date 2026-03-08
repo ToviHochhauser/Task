@@ -29,6 +29,8 @@ services:
       ASPNETCORE_URLS: "http://+:5000"
       # Override the Windows-Auth connection string with SQL Server auth
       ConnectionStrings__DefaultConnection: "Server=db;Database=TimeClockDb;User Id=sa;Password=TimeClock_Dev123!;TrustServerCertificate=True"
+      # Provide the JWT key inline so appsettings.Development.json (gitignored) is not needed
+      Jwt__Key: "DEV-ONLY-NOT-FOR-PRODUCTION-ChangeThisKey!!"
     depends_on:
       db:
         condition: service_healthy
