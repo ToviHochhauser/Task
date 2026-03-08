@@ -1,0 +1,47 @@
+services:
+
+  # SQL Server 2022 (Linux container — replaces local Windows Auth instance)
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "TimeClock_Dev123!"
+    ports:
+      - "1433:1433"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'TimeClock_Dev123!' -Q 'SELECT 1' -b -No"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    volumes:
+      - sqldata:/var/opt/mssql
+
+  # ASP.NET Core 9 API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5000"
+      # Override the Windows-Auth connection string with SQL Server auth
+      ConnectionStrings__DefaultConnection: "Server=db;Database=TimeClockDb;User Id=sa;Password=TimeClock_Dev123!;TrustServerCertificate=True"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # React frontend served by nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  sqldata:

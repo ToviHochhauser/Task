@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    // Relax rules that are impractical inside test files
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    // Provide @testing-library/jest-dom type declarations (e.g. toBeInTheDocument)
+    "types": ["@testing-library/jest-dom"]
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,24 @@
+# .NET
+**/bin/
+**/obj/
+backend/*.user
+backend/.vs/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Playwright
+playwright-report/
+test-results/
+
+# IDE
+.vs/
+.vscode/
+.claude/
+*.suo
+*.user
+
+# Environment
+*.env
+appsettings.Development.json

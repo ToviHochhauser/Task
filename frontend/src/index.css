@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Tell Tailwind v4 to activate dark: variants via the .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Primary — teal */
+  --color-primary: #0d9488;
+  --color-primary-dark: #0f766e;
+  --color-primary-darker: #134e4a;
+  --color-primary-light: #99f6e4;
+  --color-primary-xlight: #f0fdfa;
+
+  /* Status */
+  --color-success: #16a34a;
+  --color-success-hover: #15803d;
+  --color-success-light: #dcfce7;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-light: #fee2e2;
+  --color-warning-light: #fef3c7;
+  --color-warning-dark: #92400e;
+
+  /* Surfaces */
+  --color-bg: #fdf8f0;
+  --color-card: #ffffff;
+  --color-text: #1a2e2d;
+  --color-text-muted: #6b7a78;
+  --color-border: #e2e8e7;
+  --color-border-light: #f0f5f4;
+
+  /* Dark mode surfaces */
+  --color-dark-bg: #0f1419;
+  --color-dark-card: #1a2332;
+  --color-dark-text: #e2e8f0;
+  --color-dark-text-muted: #8b9cb5;
+  --color-dark-border: #2a3a4e;
+  --color-dark-border-light: #1e2d3d;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(13, 148, 136, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(13, 148, 136, 0.1), 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.14);
+
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  /* Animation */
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0);
+  }
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode base */
+.dark body,
+.dark {
+  color-scheme: dark;
+}
